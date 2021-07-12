@@ -2,21 +2,19 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 
 class Handler extends ExceptionHandler
 {
-    use ExceptionTrait;
     /**
      * A list of the exception types that are not reported.
      *
      * @var array
      */
-    protected $dontReport = [
-        //
-    ];
+    protected $dontReport = [];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
@@ -40,10 +38,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
     public function render($request, Throwable $exception)
     {
-        return $this->apiException($request, $exception);
-
+        $CustomException = new CustomException();
+        if ($exception instanceof CustomException) {
+            return $CustomException->apiException($request, $exception);
+        }
         return parent::render($request, $exception);
     }
 }
