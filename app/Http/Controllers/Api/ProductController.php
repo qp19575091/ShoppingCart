@@ -36,7 +36,7 @@ class ProductController extends Controller
      *         },
      *     ]
      * }
-     */ 
+     */
     public function index()
     {
         $product = Product::simplepaginate();
@@ -45,25 +45,25 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        Auth::user()->products()->create([
-            $request->validated()
+        $product = Auth::user()->products()->create([
+            $request->all()
         ]);
-        $product = Product::create([
-            $request->validated()
-        ]);
+        dd($product);
+        // $product = Auth::user()->products()->create([
+        //     $request->validated()
+        // ]);
         return $product;
     }
 
     public function show(Product $product)
     {
-        
     }
 
     public function update(ProductRequest $request, Product $product)
     {
         $product = Product::where('id', $product->id)->where('user_id', auth()->user()->id)->first();
 
-        if($product) {
+        if ($product) {
             $product->update([
                 $request->validated()
             ]);
@@ -77,9 +77,14 @@ class ProductController extends Controller
      * @response 204{
      *     
      * }
-     */ 
+     */
     public function destroy(Product $product)
     {
+        $product = Product::where('user_id', auth()->user()->id)->where('id', $product->id)->first();
+        return $product;
+        if (!$product) {
+            return response()->json(['Not Found Product']);
+        }
         $product->delete();
         return response()->noContent();
     }
