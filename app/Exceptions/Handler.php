@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use App\Http\Controllers\Api\UserController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
