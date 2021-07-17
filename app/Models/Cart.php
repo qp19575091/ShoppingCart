@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Cart extends Model
 {
     use HasFactory;
@@ -13,12 +14,21 @@ class Cart extends Model
 
     public function products()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function show()
     {
-        return Cart::where('user_id', auth()->user()->id)->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->get();
+
+        if ($cart->isEmpty()) {
+            return response('No products in cart.');
+        }
+        return $cart;
     }
 
     public function add(Product $product)
@@ -31,11 +41,13 @@ class Cart extends Model
                 'product_id' => $product->id,
                 'qty' => 1,
             ]);
-        } else {
+        } elseif ($cart->qty < $product->quantity_left) {
             $cart->qty += 1;
             $cart->save();
+        } else {
+            return response()->json(['message' => '庫存不夠. ' . 'Your cart already has ' . $cart->qty]);
         }
-        return response()->json(['qty' => $cart->qty]);
+        return response()->json(['message' => 'The Product ' . $product->name . ' has ' . $cart->qty . ' in cart']);
     }
 
     public function deleteByOne(Product $product)
@@ -43,15 +55,15 @@ class Cart extends Model
         $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
 
         if (!$cart) {
-            return response()->json('No product in cart');
+            return response()->json('No product in cart.');
         }
         $cart->qty -= 1;
         $cart->save();
         if ($cart->qty === 0) {
             $cart->delete();
-            return response()->json('No product in cart');
+            return response()->json('No product in cart.');
         }
-        return response()->json(['qty' => $cart->qty]);
+        return response()->json(['message' => 'The Product ' . $product->name . ' has ' . $cart->qty . ' in cart.']);
     }
 
     public function deleteProduct(Product $product)
@@ -61,7 +73,7 @@ class Cart extends Model
         if ($cart) {
             $cart->each->delete();
         }
-        return response()->json(['message' => 'The Product is null']);
+        return response()->json(['message' => 'The Product has already clear.']);
     }
 
     public function deleteAllCart()
@@ -73,7 +85,7 @@ class Cart extends Model
 
     public function isProductInCart(Product $product)
     {
-        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->exist();
         return $cart;
     }
 }

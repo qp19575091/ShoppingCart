@@ -1,17 +1,16 @@
 <?php
 
-class CustomException
-{
-    private $error;
+namespace App\Exceptions;
 
-    public function __construct(Exception $error)
+class ModelNotFoundException extends CustomException
+{
+    public function __construct()
     {
-        $this->error = $error;
+        parent::__construct(new \Exception('Resource Not Found'));
     }
 
-    public function toJson()
-    {
-        return response()->json(['error' => $this->error]);
+    public function render($request) {
+        return response('testse');
     }
 }
 // class CustomerError {

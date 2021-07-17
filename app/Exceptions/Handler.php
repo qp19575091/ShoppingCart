@@ -4,10 +4,17 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-
+use App\Exceptions\CustomExceptionTrait;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    
     /**
      * A list of the exception types that are not reported.
      *
@@ -40,10 +47,16 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        $CustomException = new CustomException();
-        if ($exception instanceof CustomException) {
-            return $CustomException->apiException($request, $exception);
+        if ($exception instanceof ModelNotFoundException){
+            return response()->json(['error' => 'Resource Not Found'], 404);
         }
+        if ($exception instanceof AuthenticationException){
+            return response()->json(['error' => 'Unauthentication'], 401);
+        }
+        if ($exception instanceof AuthorizationException){
+            return response()->json(['error' => 'UnAuthorization'], 401);
+        }
+        
         return parent::render($request, $exception);
     }
 }

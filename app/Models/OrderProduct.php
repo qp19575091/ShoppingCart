@@ -10,6 +10,8 @@ class OrderProduct extends Pivot
 {
     use HasFactory;
 
+    protected $fillable = ['price'];
+
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('qty');

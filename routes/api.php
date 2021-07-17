@@ -29,14 +29,13 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/cart', [Api\CartController::class, 'show']);
     Route::post('/cart/products/{product}', [Api\CartController::class, 'add']);
     Route::delete('/cart/products/{product}', [Api\CartController::class, 'deleteByOne']);
-    Route::delete('/cart/{product}', [Api\CartController::class, 'deleteProduct']);
+    Route::delete('/cart/{id}', [Api\CartController::class, 'deleteProduct']);
     Route::delete('/cart', [Api\CartController::class, 'deleteAllCart']);
 
     //Order
-    Route::get('/order', [Api\OrderController::class, 'show']);
+    Route::get('/order', [Api\OrderController::class, 'checkout']);
     Route::post('/order', [Api\OrderController::class, 'store']);
 });
-
 
 //user register
 Route::post('register', [Api\UserController::class, 'register']);

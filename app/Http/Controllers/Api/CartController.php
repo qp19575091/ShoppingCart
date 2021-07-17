@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Facade;
 use App\Models\Cart;
 use App\Models\Product;
 

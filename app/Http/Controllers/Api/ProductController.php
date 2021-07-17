@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Auth;
+use App\Http\Resources\ProductResource;
+use DB;
 
 class ProductController extends Controller
 {
@@ -39,36 +40,44 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::simplepaginate();
-        return response()->json($product);
+        DB::enableQueryLog(); // Enable query log
+
+        $product = Product::with('users')->simplepaginate();
+
+        dd(DB::getQueryLog()); // Show results of log
+        
+
+        return response()->json(ProductResource::collection($product));
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request, Product $product)
     {
-        $product = Auth::user()->products()->create([
-            $request->all()
-        ]);
-        dd($product);
-        // $product = Auth::user()->products()->create([
-        //     $request->validated()
-        // ]);
-        return $product;
+        $product = Auth::User()->products()->create($request->validated());
+
+        return response()->json(new ProductResource($product));
     }
 
     public function show(Product $product)
     {
+        // Has resource in database but Forbidden for the user
+        if (!$product) {
+            return response()->json(['message' => 'Forbidden.'], 403);
+        }
+        return response()->json(new ProductResource($product));
     }
 
     public function update(ProductRequest $request, Product $product)
     {
         $product = Product::where('id', $product->id)->where('user_id', auth()->user()->id)->first();
 
-        if ($product) {
-            $product->update([
-                $request->validated()
-            ]);
+        // Has resource in database but Forbidden for the user
+        if (!$product) {
+            return response()->json(['message' => 'Forbidden.'], 403);
         }
-        return $product;
+
+        $product = $product->update($request->validated());
+
+        return response()->json(new ProductResource($product));
     }
 
     /**
@@ -80,12 +89,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product = Product::where('user_id', auth()->user()->id)->where('id', $product->id)->first();
-        return $product;
+        $product = Product::with('user')->where('user_id', auth()->user()->id)->where('id', $product->id)->first();
+
+        // Has resource in database but Forbidden for the user 
         if (!$product) {
-            return response()->json(['Not Found Product']);
+            return response()->json(['message' => 'Forbidden.'], 403);
         }
         $product->delete();
+
         return response()->noContent();
     }
 }
