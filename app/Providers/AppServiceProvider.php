@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Wrapping data
          */
-        // JsonResource::withoutWrapping();
+        JsonResource::withoutWrapping();
     }
 }

@@ -16,33 +16,33 @@ class OrderController extends Controller
 
     public function checkout()
     {
-        // DB::connection()->enableQueryLog();
-        // $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
-        // $products = Product::select('id', 'quantity_left')->whereIn('id', $cart->pluck('product_id'))->get();
-        // $products = Product::select('id', 'quantity_left')->whereIn('id', $cart->pluck('product_id'))->pluck('quantity_left', 'id');
-        // dd(DB::getQueryLog());
-        // dd($products);
-
-        // find product in user cart
+        // Find product in user cart
         $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
+
         $products = Product::select('id', 'quantity_left')
             ->whereIn('id', $cart->pluck('product_id'))
             ->pluck('quantity_left', 'id');
         
-        // check the product quantity_left
+        // check the cart is empty or not
+        if($cart->isEmpty()){
+            return response()->json(['message' => 'Your cart is empty. Try to add product to cart']);
+        }
+
+        // Check the product quantity_left
         foreach ($cart as $cartProduct) {
             if (!isset($products[$cartProduct->product_id])
                 || $products[$cartProduct->product_id] < $cartProduct->qty) {
                 return 'Product ' . $cartProduct->products->name . ' not found in stock';
             }
         }
+        // Checkout transaction
         try {
             DB::transaction(function () use ($cart){
                 $order = Order::create([
                     'user_id' => auth()->user()->id,
                     'total_price' => 0
                 ]);
-        
+                
                 foreach ($cart as $cartProduct) {
                     $order->products()->attach($cartProduct->product_id, [
                         'qty' => $cartProduct->qty,
@@ -51,18 +51,12 @@ class OrderController extends Controller
                     $order->increment('total_price', $cartProduct->qty * $cartProduct->products->price);
                     Product::find($cartProduct->products->id)->decrement('quantity_left', $cartProduct->qty);
                 }
+                
                 Cart::where('user_id', auth()->user()->id)->delete();
-                return 'Success.';
             });
         } catch (\Exception $e) {
-            return 'Try again or contact us';
+            return response()->json(['message' => 'Try again or contact us']);
         }
-        
-        
-    }
-
-
-    public function store()
-    {
+        return response()->json(['message' => 'Success']);
     }
 }

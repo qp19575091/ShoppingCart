@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Response;
 
 /**
@@ -145,19 +146,6 @@ class UserController extends Controller
     {
         Auth::logout();
         return response()->json(['message' => 'Success.'], 204);
-
-        // try {
-        //     if (!$user = JWTAuth::parseToken()->authenticate()) {
-        //         return response()->json(['user_not_found'], 404);
-        //     }
-        // } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-        //     return response()->json(['message' => 'Unauthenticated.'], 401);
-        // } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-        //     return response()->json(['message' => 'Not find.'], 404);
-        // } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-        //     return response()->json(['message' => 'Server error.'], 500);
-        // }
-        // return response()->json(['message' => 'Success.'], 204);
     }
 
 
@@ -181,6 +169,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(auth()->user(), 200);
+        return new UserResource(auth()->user());
     }
 }
