@@ -10,10 +10,42 @@ use App\Models\Product;
 use App\Models\User;
 use DB;
 
+/**
+ * @group Order endpoints
+ */
 class OrderController extends Controller
 {
     public $totalPrice;
 
+     /**
+     * Clear cart
+     * 
+     * @authenticated
+     * 
+     * @response 200 {
+     *      "message": "Your cart is empty. Try to add products to cart"
+     * }
+     * 
+     * @response 200 {
+     *      "message": "Product Dignissimos. Not found in stock"
+     * }
+     * 
+     * @response 200 {
+     *      "message": "Success."
+     * }
+     * 
+     * @response status=401 scenario="Unauthenticated" {
+     *     "error": "Unauthenticated."
+     * }
+     * 
+     * @response status=404 scenario="Not Found" {
+     *     "error": "Resource Not Found"
+     * }
+     * 
+     * @response status=500 scenario="Server Error" {
+     *     "error": "Try again or contact us"
+     * }
+     */
     public function checkout()
     {
         // Find product in user cart
@@ -32,7 +64,7 @@ class OrderController extends Controller
         foreach ($cart as $cartProduct) {
             if (!isset($products[$cartProduct->product_id])
                 || $products[$cartProduct->product_id] < $cartProduct->qty) {
-                return 'Product ' . $cartProduct->products->name . ' not found in stock';
+                return response()->json(['message' => 'Product ' . $cartProduct->products->name . ' not found in stock']);
             }
         }
         // Checkout transaction
@@ -55,7 +87,7 @@ class OrderController extends Controller
                 Cart::where('user_id', auth()->user()->id)->delete();
             });
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Try again or contact us']);
+            return response()->json(['message' => 'Try again or contact us'], 500);
         }
         return response()->json(['message' => 'Success']);
     }

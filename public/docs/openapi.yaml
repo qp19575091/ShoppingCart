@@ -1,0 +1,1102 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://ShoppingCart.test'
+paths:
+  /api/users.orders:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthentication
+                properties:
+                  error:
+                    type: string
+                    example: Unauthentication
+      tags:
+        - 'UserOrder endpoints'
+      security: []
+  /api/users.products:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthentication
+                properties:
+                  error:
+                    type: string
+                    example: Unauthentication
+      tags:
+        - 'UserProduct endpoints'
+      security: []
+  /api/logout:
+    post:
+      summary: 'Log the user out of the application.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: '204, {'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        500:
+          description: '500, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server error.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server error.'
+      tags:
+        - 'Auth endpoints'
+  /api/users:
+    get:
+      summary: 'Shows authenticated user information'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 2
+                  name: Demo
+                  email: demo@demo.com
+                  email_verified_at: null
+                  created_at: '2020-05-25T06:21:47.000000Z'
+                  updated_at: '2020-05-25T06:21:47.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  name:
+                    type: string
+                    example: Demo
+                  email:
+                    type: string
+                    example: demo@demo.com
+                  email_verified_at:
+                    type: string
+                    example: null
+                  created_at:
+                    type: string
+                    example: '2020-05-25T06:21:47.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2020-05-25T06:21:47.000000Z'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Auth endpoints'
+  /api/register:
+    post:
+      summary: 'Handle a registration request for the application.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Account has been created'
+                properties:
+                  message:
+                    type: string
+                    example: 'Account has been created'
+        422:
+          description: '422, Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    email:
+                      - 'The email field is required.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      name:
+                        - 'The name field is required.'
+                      email:
+                        - 'The email field is required.'
+                      password:
+                        - 'The password field is required.'
+      tags:
+        - 'Auth endpoints'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: Demo
+                email:
+                  type: email
+                  description: 'The email of the user.'
+                  example: demo@demo.com
+                password:
+                  type: password
+                  description: 'The password of the user.'
+                  example: password
+                password_confirmation:
+                  type: password
+                  description: 'The password confirmation of the user.'
+                  example: password
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/login:
+    post:
+      summary: 'Handle a login request to the application.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n   \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjc\n             uMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMzg5MzAyNCwiZXhwIjo\n             xNjIzODk2NjI0LCJuYmYiOjE2MjM4OTMwMjQsImp0aSI6IndkTllaU3NoejlBZmt\n             PRzgiLCJzdWIiOjExLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA\n             4NzJkYjdhNTk3NmY3In0.eEMJuRcY5OgSD2l4jLhbcBKBA5QvCvkrPBn8ZzKyP38\"\n}"
+        422:
+          description: '422, Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors: 'The name or password field is wrong.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: string
+                    example: 'The name or password field is wrong.'
+      tags:
+        - 'Auth endpoints'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: email
+                  description: 'The email of the user.'
+                  example: demo@demo.com
+                password:
+                  type: password
+                  description: 'The password of the user.'
+                  example: password
+              required:
+                - email
+                - password
+      security: []
+  /api/cart:
+    get:
+      summary: 'Shows user cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No products in cart.'
+                properties:
+                  message:
+                    type: string
+                    example: 'No products in cart.'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Cart endpoints'
+    delete:
+      summary: 'Clear cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Cart has been clear.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Cart has been clear.'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Cart endpoints'
+    parameters:
+      -
+        in: path
+        name: product
+        description: 'The ID of the product. emxample: 1'
+        example: 15
+        required: true
+        schema:
+          type: integer
+  '/api/cart/products/{product}':
+    post:
+      summary: 'Add to cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: '庫存不夠. Your cart already has 3.'
+                properties:
+                  message:
+                    type: string
+                    example: '庫存不夠. Your cart already has 3.'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Cart endpoints'
+    delete:
+      summary: 'Delete one product quantity to cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Product Velit vitae debitis. Not in the cart.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Product Velit vitae debitis. Not in the cart.'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Cart endpoints'
+    parameters:
+      -
+        in: path
+        name: product
+        description: 'The ID of the product. emxample: 1'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  '/api/cart/{id}':
+    delete:
+      summary: 'Delete product from cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The Product has already clear.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The Product has already clear.'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Cart endpoints'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the cart.'
+        example: 11
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: product
+        description: 'The ID of the product. emxample: 1'
+        example: 8
+        required: true
+        schema:
+          type: integer
+  /api/order:
+    get:
+      summary: 'Clear cart'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Success.
+                properties:
+                  message:
+                    type: string
+                    example: Success.
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+        500:
+          description: '500, Server Error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Try again or contact us'
+                properties:
+                  error:
+                    type: string
+                    example: 'Try again or contact us'
+      tags:
+        - 'Order endpoints'
+  /api/products:
+    get:
+      summary: 'Get the products'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n    {\n         \"name\": \"Officiis quia.\",\n         \"price\": \"40.68\",\n         \"quantity_left\": 3,\n         \"users\": {\n             \"name\": \"Prof. Adrien Adams\",\n             \"email\": \"Demo@Demo.com\"\n         }\n    },\n    {\n         \"name\": \"Ad consequatur ut.\",\n         \"price\": \"35.09\",\n         \"quantity_left\": 3\n         \"users\": {\n             \"name\": \"Prof. Adrien Adams\",\n             \"email\": \"Demo@Demo.com\"\n         }\n    }\n}"
+      tags:
+        - 'Products endpoints'
+      security: []
+    post:
+      summary: 'Create product'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: 'Explicabo dolorem.'
+                  price: '35.35'
+                  quantity_left: 3
+                properties:
+                  name:
+                    type: string
+                    example: 'Explicabo dolorem.'
+                  price:
+                    type: string
+                    example: '35.35'
+                  quantity_left:
+                    type: integer
+                    example: 3
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: '403, Forbidden'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Forbidden
+                properties:
+                  error:
+                    type: string
+                    example: Forbidden
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Products endpoints'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the products.'
+                  example: 'Explicabo dolorem'
+                price:
+                  type: number
+                  description: 'The price of the products.'
+                  example: 35.35
+                quantity_left:
+                  type: integer
+                  description: 'The quantity_left of the products.'
+                  example: 3
+              required:
+                - name
+                - price
+                - quantity_left
+    parameters:
+      -
+        in: path
+        name: page
+        description: 'The number of the product page. emxample: ?page = 1'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  '/api/products/{id}':
+    get:
+      summary: 'Show product'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: 'Explicabo dolorem.'
+                  price: '35.35'
+                  quantity_left: 3
+                properties:
+                  name:
+                    type: string
+                    example: 'Explicabo dolorem.'
+                  price:
+                    type: string
+                    example: '35.35'
+                  quantity_left:
+                    type: integer
+                    example: 3
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Products endpoints'
+    put:
+      summary: 'Update product'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name: 'Explicabo dolorem.'
+                  price: '35.35'
+                  quantity_left: 3
+                properties:
+                  name:
+                    type: string
+                    example: 'Explicabo dolorem.'
+                  price:
+                    type: string
+                    example: '35.35'
+                  quantity_left:
+                    type: integer
+                    example: 3
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: '403, Forbidden'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Forbidden
+                properties:
+                  error:
+                    type: string
+                    example: Forbidden
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Products endpoints'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the products.'
+                  example: 'Explicabo dolorem'
+                price:
+                  type: number
+                  description: 'The price of the products.'
+                  example: 35.35
+                quantity_left:
+                  type: integer
+                  description: 'The quantity_left of the products.'
+                  example: 3
+              required:
+                - name
+                - price
+                - quantity_left
+    delete:
+      summary: 'Delete product'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: '204'
+        401:
+          description: '401, Unauthenticated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthenticated.
+                properties:
+                  error:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: '403, Forbidden'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Forbidden
+                properties:
+                  error:
+                    type: string
+                    example: Forbidden
+        404:
+          description: '404, Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Resource Not Found'
+                properties:
+                  error:
+                    type: string
+                    example: 'Resource Not Found'
+      tags:
+        - 'Products endpoints'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the product.'
+        example: 3
+        required: true
+        schema:
+          type: integer

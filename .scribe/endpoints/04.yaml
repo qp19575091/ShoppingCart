@@ -1,0 +1,27 @@
+name: 'UserOrder endpoints'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/users.orders
+    metadata:
+      title: ''
+      description: ''
+      authenticated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"error":"Unauthentication"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
+/**
+ * @group UserOrder endpoints
+ */
 class UserOrderController extends Controller
 {
     // Show the user order history

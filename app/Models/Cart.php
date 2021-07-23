@@ -32,7 +32,7 @@ class Cart extends Model
         $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
 
         if ($cart->isEmpty()) {
-            return response('No products in cart.');
+            return response(['message' => 'No products in cart.']);
         }
         // return $cart;
         return CartResource::collection($cart);
@@ -66,7 +66,7 @@ class Cart extends Model
         $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
 
         if (!$cart) {
-            return response()->json('No product in cart.');
+            return response()->json(['message'=> 'Product '. $product->name .' Not in the cart.']);
         }
         $cart->decrement('qty');
 

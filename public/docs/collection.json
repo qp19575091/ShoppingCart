@@ -1,0 +1,952 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "ShoppingCart.test"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "ffcb51d1-8fee-4eb9-b148-b7a25282579b",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "UserOrder endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/users.orders",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users.orders",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/users.orders"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"error\":\"Unauthentication\"}",
+                            "name": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "UserProduct endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/users.products",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users.products",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/users.products"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"error\":\"Unauthentication\"}",
+                            "name": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Auth endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Log the user out of the application.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "\"message\": \"Success.\"\n}",
+                            "name": "204, {"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n    \"message\": \"Server error.\"\n}",
+                            "name": "500, Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Shows authenticated user information",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 2,\n    \"name\": \"Demo\",\n    \"email\": \"demo@demo.com\",\n    \"email_verified_at\": null,\n    \"created_at\": \"2020-05-25T06:21:47.000000Z\",\n    \"updated_at\": \"2020-05-25T06:21:47.000000Z\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Handle a registration request for the application.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Demo\",\"email\":\"demo@demo.com\",\"password\":\"password\",\"password_confirmation\":\"password\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"Account has been created\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n   \"message\": \"The given data was invalid.\",\n   \"errors\": {\n       \"name\": [\n           \"The name has already been taken.\"\n    ],\n       \"email\": [\n           \"The email has already been taken.\"\n    ]\n   }\n}",
+                            "name": "422, Validation error"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n   \"message\": \"The given data was invalid.\",\n   \"errors\": {\n       \"name\": [\n           \"The name field is required.\"\n    ],\n       \"email\": [\n           \"The email field is required.\"\n    ],\n       \"password\": [\n           \"The password field is required.\"\n    ]\n   }\n}",
+                            "name": "422, Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Handle a login request to the application.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"demo@demo.com\",\"password\":\"password\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n   \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjc\n             uMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMzg5MzAyNCwiZXhwIjo\n             xNjIzODk2NjI0LCJuYmYiOjE2MjM4OTMwMjQsImp0aSI6IndkTllaU3NoejlBZmt\n             PRzgiLCJzdWIiOjExLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA\n             4NzJkYjdhNTk3NmY3In0.eEMJuRcY5OgSD2l4jLhbcBKBA5QvCvkrPBn8ZzKyP38\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n   \"message\": \"The given data was invalid.\",\n   \"errors\": {\n       \"name\": [\n           \"The name field is required.\"\n    ],\n       \"password\": [\n           \"The password field is required.\"\n    ]\n}",
+                            "name": "422, Validation error"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n   \"message\": \"The given data was invalid.\",\n   \"errors\":  \"The name or password field is wrong.\"\n}",
+                            "name": "422, Validation error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cart endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Shows user cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cart",
+                            "variable": [
+                                {
+                                    "id": "product",
+                                    "key": "product",
+                                    "value": "15",
+                                    "description": "The ID of the product. emxample: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"qty\": 2,\n    \"products\": {\n        \"name\": \"Dignissimos.\",\n        \"price\": \"35.19\",\n        \"quantity_left\": 2\n    },\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"No products in cart.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Add to cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/products\/:product",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cart\/products\/:product",
+                            "variable": [
+                                {
+                                    "id": "product",
+                                    "key": "product",
+                                    "value": "2",
+                                    "description": "The ID of the product. emxample: 1"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"The Product Laborum natus nam. has 1 in cart.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"\u5eab\u5b58\u4e0d\u5920. Your cart already has 3.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete one product quantity to cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/products\/:product",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cart\/products\/:product",
+                            "variable": [
+                                {
+                                    "id": "product",
+                                    "key": "product",
+                                    "value": "11",
+                                    "description": "The ID of the product. emxample: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"The Product Laborum natus nam. has 1 in cart.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"message\": \"Product Velit vitae debitis. Not in the cart.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete product from cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cart\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "11",
+                                    "description": "The ID of the cart."
+                                },
+                                {
+                                    "id": "product",
+                                    "key": "product",
+                                    "value": "8",
+                                    "description": "The ID of the product. emxample: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"The Product has already clear.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Clear cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/cart"
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Cart has been clear.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Order endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Clear cart",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/order",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/order"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Your cart is empty. Try to add products to cart\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Product Dignissimos. Not found in stock\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Success.\"\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n    \"error\": \"Try again or contact us\"\n}",
+                            "name": "500, Server Error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Products endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get the products",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/products",
+                            "variable": [
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "2",
+                                    "description": "The number of the product page. emxample: ?page = 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    {\n         \"name\": \"Officiis quia.\",\n         \"price\": \"40.68\",\n         \"quantity_left\": 3,\n         \"users\": {\n             \"name\": \"Prof. Adrien Adams\",\n             \"email\": \"Demo@Demo.com\"\n         }\n    },\n    {\n         \"name\": \"Ad consequatur ut.\",\n         \"price\": \"35.09\",\n         \"quantity_left\": 3\n         \"users\": {\n             \"name\": \"Prof. Adrien Adams\",\n             \"email\": \"Demo@Demo.com\"\n         }\n    }\n}",
+                            "name": "200"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create product",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/products"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Explicabo dolorem\",\"price\":35.35,\"quantity_left\":3}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"name\": \"Explicabo dolorem.\",\n    \"price\": \"35.35\",\n    \"quantity_left\": 3\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n    \"error\": \"Forbidden\"\n}",
+                            "name": "403, Forbidden"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show product",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/products\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "3",
+                                    "description": "The ID of the product."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"name\": \"Explicabo dolorem.\",\n    \"price\": \"35.35\",\n    \"quantity_left\": 3\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update product",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/products\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "6",
+                                    "description": "The ID of the product."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Explicabo dolorem\",\"price\":35.35,\"quantity_left\":3}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"name\": \"Explicabo dolorem.\",\n    \"price\": \"35.35\",\n    \"quantity_left\": 3\n}",
+                            "name": "200"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n    \"error\": \"Forbidden\"\n}",
+                            "name": "403, Forbidden"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete product",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/products\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/products\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "The ID of the product."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "{\n\n}",
+                            "name": "204"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": \"Unauthenticated.\"\n}",
+                            "name": "401, Unauthenticated"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n    \"error\": \"Forbidden\"\n}",
+                            "name": "403, Forbidden"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"error\": \"Resource Not Found\"\n}",
+                            "name": "404, Not Found"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

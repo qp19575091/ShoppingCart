@@ -7,6 +7,9 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+/**
+ * @group UserProduct endpoints
+ */
 class UserProductController extends Controller
 {
     // Show the user create product history
