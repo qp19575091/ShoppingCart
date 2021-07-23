@@ -13,6 +13,11 @@ class Cart extends Model
 
     protected $fillable = ['user_id', 'product_id', 'qty'];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     public function products()
     {
         return $this->belongsTo(Product::class, 'product_id');

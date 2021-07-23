@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 1;
+});
+
+Route::get('/test', function () {
+    $orders = Order::with('products')->get();
+
+
+    foreach ($orders as $order) {
+        foreach ($order->products as $product) {
+            echo  $product->pivot->qty;
+        }
+    }
+    return;
+    dd($order->products->pivot->qty);
+    return '1' . $order->pivot;
 });

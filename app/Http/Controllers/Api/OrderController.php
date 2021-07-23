@@ -19,14 +19,14 @@ class OrderController extends Controller
         // Find product in user cart
         $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
 
+        // Check the cart is empty or not
+        if($cart->isEmpty()){
+            return response()->json(['message' => 'Your cart is empty. Try to add products to cart']);
+        }
+
         $products = Product::select('id', 'quantity_left')
             ->whereIn('id', $cart->pluck('product_id'))
             ->pluck('quantity_left', 'id');
-        
-        // check the cart is empty or not
-        if($cart->isEmpty()){
-            return response()->json(['message' => 'Your cart is empty. Try to add product to cart']);
-        }
 
         // Check the product quantity_left
         foreach ($cart as $cartProduct) {

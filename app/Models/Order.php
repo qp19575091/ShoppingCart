@@ -11,6 +11,11 @@ class Order extends Model
 
     protected $fillable = ['user_id', 'total_price'];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     public function users()
     {
         return $this->belongsTo(User::class);
@@ -18,6 +23,6 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot(['quantity', 'price']);
+        return $this->belongsToMany(Product::class)->withPivot(['qty', 'price']);
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Product;
 use Auth;
 use App\Http\Resources\ProductResource;
 use DB;
+use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
 {
@@ -40,13 +41,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        DB::enableQueryLog(); // Enable query log
-
-        $product = Product::with('users')->simplepaginate();
-
-        dd(DB::getQueryLog()); // Show results of log
+        $product = Product::with('users')->simplepaginate(10);
         
-
         return response()->json(ProductResource::collection($product));
     }
 

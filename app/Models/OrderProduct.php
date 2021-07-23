@@ -12,6 +12,11 @@ class OrderProduct extends Pivot
 
     protected $fillable = ['price'];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('qty');
