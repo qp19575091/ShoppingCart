@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
  */
 class UserProductController extends Controller
 {
-    // Show the user create product history
+    /**
+     * Show the user create product history
+     */
     public function product()
     {
         $product = Product::with('users')->where('user_id', auth()->user()->id)->get();

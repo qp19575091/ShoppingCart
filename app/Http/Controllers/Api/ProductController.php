@@ -136,7 +136,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $product = Product::where('id', $product->id)->where('user_id', auth()->user()->id)->first();
+        $product = Product::UserProduct()->first();
 
         // Has resource in database but Forbidden for the user
         if (!$product) {
@@ -172,7 +172,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product = Product::with('user')->where('user_id', auth()->user()->id)->where('id', $product->id)->first();
+        $product = Product::where('user_id', auth()->user()->id)->where('id', $product->id)->first();
 
         // Has resource in database but Forbidden for the user 
         if (!$product) {

@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->group(function () {
-    //product
-    Route::apiResource('/products', Api\ProductController::class);
+    
     //user logout
     Route::post('/logout', [Api\UserController::class, 'logout']);
     //get auth user information
@@ -43,6 +42,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users.products',[Api\UserProductController::class, 'product']);
 });
 
+
+//product
+Route::apiResource('/products', Api\ProductController::class);
 //user register
 Route::post('register', [Api\UserController::class, 'register']);
 //user login

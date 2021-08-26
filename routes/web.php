@@ -21,15 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    $orders = Order::with('products')->get();
+    $order = new Order();
 
-
-    foreach ($orders as $order) {
-        foreach ($order->products as $product) {
-            echo  $product->pivot->qty;
-        }
-    }
-    return;
-    dd($order->products->pivot->qty);
-    return '1' . $order->pivot;
+    return $order->sum;
 });

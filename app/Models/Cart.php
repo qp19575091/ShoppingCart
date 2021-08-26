@@ -18,6 +18,8 @@ class Cart extends Model
         'updated_at' => 'datetime:Y-m-d',
     ];
 
+    protected $appends = ['sum'];
+
     public function products()
     {
         return $this->belongsTo(Product::class, 'product_id');
@@ -26,7 +28,22 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+    public function getSumAttribute()
+    {
+        $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
+        $sum = 0;
 
+        foreach($cart as $cartProduct){
+            $sum += $cartProduct->qty * $cartProduct->products->price;
+        }
+        return  $sum;
+        
+    }
+
+    /**
+     *  Show Cart
+     */
     public function show()
     {
         $cart = Cart::with('products')->where('user_id', auth()->user()->id)->get();
@@ -34,10 +51,13 @@ class Cart extends Model
         if ($cart->isEmpty()) {
             return response(['message' => 'No products in cart.']);
         }
-        // return $cart;
+        
         return CartResource::collection($cart);
     }
 
+    /**
+     *  Add one product in cart
+     */
     public function add(Product $product)
     {
         // Find product in user cart
@@ -61,6 +81,9 @@ class Cart extends Model
         return response()->json(['message' => 'The Product ' . $product->name . ' has ' . $cart->qty . ' in cart']);
     }
 
+    /**
+     *  Delete one amout of product in cart
+     */
     public function deleteByOne(Product $product)
     {
         $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
@@ -77,6 +100,9 @@ class Cart extends Model
         return response()->json(['message' => 'The Product ' . $product->name . ' has ' . $cart->qty . ' in cart.']);
     }
 
+    /**
+     *  Delete specity product in cart
+     */
     public function deleteProduct(Product $product)
     {
         $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->get();
@@ -87,6 +113,9 @@ class Cart extends Model
         return response()->json(['message' => 'The Product has already clear.']);
     }
 
+    /**
+     *  Clear cart
+     */
     public function deleteAllCart()
     {
         $cart = Cart::where('user_id', auth()->user()->id)->get();

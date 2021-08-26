@@ -1,6 +1,7 @@
+## This is a sample API for `ShoppingCart ` use JWT authorization
 
 ------------
-This is a sample API for `ShoppingCart ` use JWT authorization
+
 
 Installation
 ------------
